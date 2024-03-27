@@ -5,13 +5,44 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-@Document(collection = "adminDetails")
+import java.util.Date;
+
+@Document(collection = "admin details")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class AdminDetails {
+
     @Id
     private String id;
-    private String employeeId;
+
+    @Field("employeeId")
+    private int employeeId;
+
+    @Field("firstName")
+    private String firstName;
+
+    @Field("middleName")
+    private String middleName;
+
+    @Field("lastName")
+    private String lastName;
+
+    @Field("email")
+    private String email;
+
+    @Field("phoneNumber")
+    private int phoneNumber;
+
+    @Field("gender")
+    private String gender;
+
+    @Field("profile")
+    private String profile;
+
+    @Field("timestamp")
+    private Date timestamp = new Date();
+
 }

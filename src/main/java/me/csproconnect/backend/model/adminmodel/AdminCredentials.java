@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "admins")
+@Document(collection = "admin credentials")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,5 +15,7 @@ public class AdminCredentials {
     private String id;
     private String loginid;
     private String password;
+
+
 }
 

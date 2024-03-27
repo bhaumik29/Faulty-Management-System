@@ -15,6 +15,16 @@ public class AdminDetailsController {
     @Autowired
     private AdminDetailsService adminService;
 
+    @PostMapping("/temp")
+    public ResponseEntity<?> gettempDetails() {
+        AdminDetails foundAdmin = adminService.findByEmployeeId(111);
+        if (foundAdmin == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ApiResponse(false, "No Admin Found"));
+        }
+        return ResponseEntity.ok(new ApiResponse(true, "Admin Details Found!", foundAdmin));
+    }
+
     @PostMapping("/getDetails")
     public ResponseEntity<?> getDetails(@RequestBody AdminDetails admin) {
         AdminDetails foundAdmin = adminService.findByEmployeeId(admin.getEmployeeId());

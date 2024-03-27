@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AdminDetailsRepo extends MongoRepository<AdminDetails, String> {
-    AdminDetails findByEmployeeId(String employeeId);
+    AdminDetails findByEmployeeId(int employeeId);
 }
