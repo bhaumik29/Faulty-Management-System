@@ -12,7 +12,8 @@ public class ApiResponse {
     @Id
     private boolean success;
     private String message;
-    private AdminCredentials admin;
+    private AdminCredentials adminc;
+    private AdminDetails admind;
     private String loginid;
     private String id;
 
@@ -37,9 +38,14 @@ public class ApiResponse {
         this.id = id;
     }
 
-    public ApiResponse(boolean success, String message, AdminCredentials admin) {
+    public ApiResponse(boolean success, String message, AdminCredentials adminc) {
         this.success = success;
         this.message = message;
-        this.admin = admin;
+        this.adminc = adminc;
+    }
+    public ApiResponse(boolean success, String message, AdminDetails admind) {
+        this.success = success;
+        this.message = message;
+        this.admind = admind;
     }
 }
