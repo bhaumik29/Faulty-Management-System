@@ -17,16 +17,23 @@ public class ApiResponse {
     @Id
     private boolean success;
     private String message;
-    private List<FacultyCredentials> facultyc;
-    private List<FacultyDetails> facultyd;
+    private FacultyCredentials facultyc;
+    private FacultyDetails facultyd;
+//    private List<FacultyDetails> lfacultyd;
     private int loginid;
     private String id;
+    private long c;
 
     public ApiResponse(boolean success, String message, int loginid, String id) {
         this.success = success;
         this.message = message;
         this.loginid = loginid;
         this.id = id;
+    }
+    public ApiResponse(boolean success, String message, long c) {
+        this.success = success;
+        this.message = message;
+        this.c = c;
     }
 
     public ApiResponse(boolean success, String id) {
@@ -40,12 +47,17 @@ public class ApiResponse {
         this.id = id;
     }
 
-    public ApiResponse(boolean success, String message, List<FacultyCredentials> facultyc) {
+    public ApiResponse(boolean success, String message, FacultyCredentials facultyc) {
         this.success = success;
         this.message = message;
         this.facultyc = facultyc;
     }
-    public ApiResponse(boolean success, String message, List<FacultyDetails> facultyd) {
+//    public ApiResponse(boolean success, String message, List<FacultyDetails> lfacultyc) {
+//        this.success = success;
+//        this.message = message;
+//        this.lfacultyd = lfacultyd;
+//    }
+    public ApiResponse(boolean success, String message, FacultyDetails facultyd) {
         this.success = success;
         this.message = message;
         this.facultyd = facultyd;

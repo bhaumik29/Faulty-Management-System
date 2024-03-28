@@ -16,9 +16,14 @@ public class FacultyDetailsController {
     private FacultyDetailsService facultyService;
 
     @PostMapping("/getDetails")
-    public ResponseEntity<?> getDetails() {
+    public ResponseEntity<?> getDetails(@RequestBody FacultyDetails request) {
         try {
-            return ResponseEntity.ok(new ApiResponse(true, "Faculty Details Found!", facultyService.getDetails()));
+            FacultyDetails faculty = facultyService.findByEmployeeId(request.getEmployeeId());
+            if (faculty == null) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(new ApiResponse(false, "No Faculty Found"));
+            }
+            return ResponseEntity.ok(new ApiResponse(true, "Faculty Details Found!", faculty));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponse(false, "Internal Server Error"));
@@ -28,7 +33,7 @@ public class FacultyDetailsController {
     @PostMapping("/addDetails")
     public ResponseEntity<?> addDetails(@RequestBody FacultyDetails faculty) {
         try {
-            FacultyDetails newFaculty = facultyService.addDetails(faculty);
+            FacultyDetails newFaculty = facultyService.addFaculty(faculty);
             return ResponseEntity.ok(new ApiResponse(true, "Faculty Details Added!", newFaculty));
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -39,8 +44,8 @@ public class FacultyDetailsController {
     @PostMapping("/updateDetails/{id}")
     public ResponseEntity<?> updateDetails(@PathVariable("id") String id, @RequestBody FacultyDetails faculty) {
         try {
-            FacultyDetails updatedFaculty = facultyService.updateDetails(id, faculty);
-            return ResponseEntity.ok(new ApiResponse(true, "Updated Successfully!", updatedFaculty));
+            FacultyDetails updatedFaculty = facultyService.updateFaculty(id, faculty);
+            return ResponseEntity.ok(new ApiResponse(true, "Updated Successfully!"));
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new ApiResponse(false, e.getMessage()));
@@ -49,14 +54,20 @@ public class FacultyDetailsController {
 
     @DeleteMapping("/deleteDetails/{id}")
     public ResponseEntity<?> deleteDetails(@PathVariable("id") String id) {
-        facultyService.deleteDetails(id);
-        return ResponseEntity.ok(new ApiResponse(true, "Deleted Successfully!"));
+        try {
+            facultyService.deleteFaculty(id);
+            return ResponseEntity.ok(new ApiResponse(true, "Deleted Successfully!"));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ApiResponse(false, e.getMessage()));
+        }
     }
 
     @GetMapping("/count")
     public ResponseEntity<?> count() {
         try {
-            return ResponseEntity.ok(new ApiResponse(true, "Count Successful!", facultyService.count()));
+            long count = facultyService.countFaculties();
+            return ResponseEntity.ok(new ApiResponse(true, "Count Successful!", count));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponse(false, "Internal Server Error"));

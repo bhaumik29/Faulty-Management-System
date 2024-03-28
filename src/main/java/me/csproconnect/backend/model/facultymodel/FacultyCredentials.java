@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Document(collection = "faculty credentials")
 @Data
 @NoArgsConstructor
@@ -15,5 +17,6 @@ public class FacultyCredentials {
     private String id;
     private int loginid;
     private String password;
+    private Date timestamp;
 }
 

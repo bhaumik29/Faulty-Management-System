@@ -5,8 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import java.util.Date;
 
-@Document(collection = "facultyDetails") // Specify the MongoDB collection name
+@Document(collection = "faculty details") // Specify the MongoDB collection name
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,4 +15,15 @@ public class FacultyDetails {
     @Id
     private String id;
     private int employeeId;
+    private String firstName;
+    private String middleName;
+    private String lastName;
+    private String email;
+    private String phoneNumber;
+    private String gender;
+    private int experience;
+    private String post;
+    private String profile;
+    private Date timestamp;
+
 }
