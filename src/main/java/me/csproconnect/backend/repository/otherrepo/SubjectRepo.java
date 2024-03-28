@@ -1,4 +1,9 @@
 package me.csproconnect.backend.repository.otherrepo;
 
-public interface SubjectRepo {
+import me.csproconnect.backend.model.othermodel.Subject;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface SubjectRepo extends MongoRepository<Subject, String> {
 }

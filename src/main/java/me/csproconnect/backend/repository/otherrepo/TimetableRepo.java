@@ -1,4 +1,14 @@
 package me.csproconnect.backend.repository.otherrepo;
 
-public interface TimetableRepo {
+import me.csproconnect.backend.model.othermodel.Timetable;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface TimetableRepo extends MongoRepository<Timetable, String> {
+
+    Timetable findBySemester(int sem);
+
 }
