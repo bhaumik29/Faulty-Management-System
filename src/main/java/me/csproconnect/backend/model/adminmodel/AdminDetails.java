@@ -34,7 +34,7 @@ public class AdminDetails {
     private String email;
 
     @Field("phoneNumber")
-    private int phoneNumber;
+    private String phoneNumber;
 
     @Field("gender")
     private String gender;

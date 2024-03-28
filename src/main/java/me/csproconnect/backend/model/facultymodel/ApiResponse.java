@@ -1,10 +1,15 @@
-package me.csproconnect.backend.model.adminmodel;
+package me.csproconnect.backend.model.facultymodel;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import me.csproconnect.backend.model.adminmodel.AdminCredentials;
+import me.csproconnect.backend.model.adminmodel.AdminDetails;
 import org.springframework.data.annotation.Id;
+
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,13 +17,10 @@ public class ApiResponse {
     @Id
     private boolean success;
     private String message;
-    private AdminCredentials adminc;
-    private AdminDetails admind;
+    private List<FacultyCredentials> facultyc;
+    private List<FacultyDetails> facultyd;
     private int loginid;
     private String id;
-
-
-
 
     public ApiResponse(boolean success, String message, int loginid, String id) {
         this.success = success;
@@ -38,14 +40,14 @@ public class ApiResponse {
         this.id = id;
     }
 
-    public ApiResponse(boolean success, String message, AdminCredentials adminc) {
+    public ApiResponse(boolean success, String message, List<FacultyCredentials> facultyc) {
         this.success = success;
         this.message = message;
-        this.adminc = adminc;
+        this.facultyc = facultyc;
     }
-    public ApiResponse(boolean success, String message, AdminDetails admind) {
+    public ApiResponse(boolean success, String message, List<FacultyDetails> facultyd) {
         this.success = success;
         this.message = message;
-        this.admind = admind;
+        this.facultyd = facultyd;
     }
 }

@@ -18,19 +18,5 @@ public class BackendApplication {
     public static void main(String[] args) {
         SpringApplication.run(BackendApplication.class, args);
     }
-
-    @Autowired
-    private AdminDetailsService adminService;
-
-    //	to get message hello world at localhost:8080 => just to verify the working
-    @GetMapping("/temp")
-    public ResponseEntity<?> gettempDetails() {
-        AdminDetails foundAdmin = adminService.findByEmployeeId(111);
-        if (foundAdmin == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(new ApiResponse(false, "No Admin Found"));
-        }
-        return ResponseEntity.ok(new ApiResponse(true, "Admin Details Found!", foundAdmin));
-    }
 }
 
