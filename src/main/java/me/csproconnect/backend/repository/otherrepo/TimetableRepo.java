@@ -8,7 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface TimetableRepo extends MongoRepository<Timetable, String> {
-
-    Timetable findBySemester(int sem);
-
+    Timetable findBySemester(int semester);
 }

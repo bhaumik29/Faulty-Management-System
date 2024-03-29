@@ -13,22 +13,26 @@ public class TimetableService {
     @Autowired
     private TimetableRepo timetableRepository;
 
-    public Optional<Timetable> getTimetable(int semester) {
-        return Optional.ofNullable(timetableRepository.findBySemester(semester));
+    public Timetable findBySemester(int semester) {
+        return timetableRepository.findBySemester(semester);
     }
 
-    public Timetable addOrUpdateTimetable(Timetable timetable) {
-        return timetableRepository.save(timetable);
+    public void addTimetable(Timetable timetable) {
+        timetableRepository.save(timetable);
     }
 
-    public boolean deleteTimetable(int semester) {
-        Timetable timetable = timetableRepository.findBySemester(semester);
-        if (timetable != null) {
-            timetableRepository.delete(timetable);
-            return true;
-        } else {
-            return false;
-        }
+    public void updateTimetable(Timetable timetable) {
+        timetableRepository.save(timetable);
     }
+
+//    public boolean deleteTimetable(int semester) {
+//        Timetable timetable = timetableRepository.findBySemester(semester);
+//        if (timetable != null) {
+//            timetableRepository.delete(timetable);
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 }
 
