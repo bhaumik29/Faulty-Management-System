@@ -1,9 +1,11 @@
-FROM eclipse-temurin:11 AS build
+# Build stage
+FROM maven:3.8.5-openjdk-17 AS build
 WORKDIR /app
 COPY . .
 RUN mvn clean package -DskipTests
 
-FROM eclipse-temurin:11-jre-slim
-COPY --from=build /target/CSProConnect-0.0.1-SNAPSHOT.jar CSProConnect.jar
+# Runtime stage
+FROM openjdk:17.0.1-jdk-slim
+COPY --from=build /app/target/CSProConnect-0.0.1-SNAPSHOT.jar CSProConnect.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "CSProConnect.jar"]
