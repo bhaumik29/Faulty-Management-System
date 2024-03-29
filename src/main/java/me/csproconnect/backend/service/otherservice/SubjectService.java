@@ -13,24 +13,28 @@ public class SubjectService {
     @Autowired
     private SubjectRepo subjectRepository;
 
-    public List<Subject> getAllSubjects() {
-        return subjectRepository.findAll();
+
+    public List<Subject> getSubjectsBySemester(int semester) {
+        return subjectRepository.findBySemester(semester);
     }
 
-    public Optional<Subject> getSubjectById(String id) {
-        return subjectRepository.findById(id);
+    public Optional<Subject> findByCode(int code) {
+        return subjectRepository.findByCode(code);
     }
 
-    public Subject addSubject(Subject subject) {
+    public Subject save(Subject subjectRequest) {
+        Subject subject = new Subject();
+        subject.setName(subjectRequest.getName());
+        subject.setCode(subjectRequest.getCode());
+        subject.setSemester(subjectRequest.getSemester());
         return subjectRepository.save(subject);
     }
 
-    public boolean deleteSubject(String id) {
-        if (subjectRepository.existsById(id)) {
-            subjectRepository.deleteById(id);
-            return true;
-        } else {
-            return false;
-        }
+    public Optional<Subject> findById(String id) {
+        return subjectRepository.findById(id);
+    }
+
+    public void deleteById(String id) {
+        subjectRepository.deleteById(id);
     }
 }

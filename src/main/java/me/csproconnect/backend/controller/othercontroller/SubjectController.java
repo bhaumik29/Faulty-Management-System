@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -17,37 +18,39 @@ public class SubjectController {
     @Autowired
     private SubjectService subjectService;
 
-    @PostMapping("/getSubject")
-    public ResponseEntity<?> getSubjectById(@RequestBody String id) {
-        Optional<Subject> subject = subjectService.getSubjectById(id);
-        if (subject.isPresent()) {
-            return ResponseEntity.ok(subject.get());
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(new ApiResponse_Subject(false, "Subject Not Found"));
+        @PostMapping("/getSubject")
+        public ResponseEntity<?> getSubjectBySemester(@RequestBody Map<String, Integer> request) {
+            int semester = request.get("semester");
+            List<Subject> subjects = subjectService.getSubjectsBySemester(semester);
+            if (subjects.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(new ApiResponse_Subject(false, "No Subject Available"));
+            } else {
+                return ResponseEntity.ok(new ApiResponse_Subject(true, "All Subjects Loaded!", subjects));
+            }
         }
-    }
-
-    @GetMapping("/getAllSubjects")
-    public List<Subject> getAllSubjects() {
-        return subjectService.getAllSubjects();
-    }
 
     @PostMapping("/addSubject")
-    public ResponseEntity<?> addSubject(@RequestBody Subject subject) {
-        Subject addedSubject = subjectService.addSubject(subject);
-        String message = (addedSubject.getId() != null) ? "Subject Added!" : "Subject Already Exists!";
-        return ResponseEntity.ok(new ApiResponse_Subject(true, message));
+    public ResponseEntity<?> addSubject(@RequestBody Subject subjectRequest) {
+        Optional<Subject> existingSubject = subjectService.findByCode(subjectRequest.getCode());
+        if (existingSubject.isPresent()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ApiResponse_Subject(false, "Subject Already Exists"));
+        } else {
+            Subject savedSubject = subjectService.save(subjectRequest);
+            return ResponseEntity.ok(new ApiResponse_Subject(true, "Subject Added!", savedSubject));
+        }
     }
 
     @DeleteMapping("/deleteSubject/{id}")
     public ResponseEntity<?> deleteSubject(@PathVariable String id) {
-        boolean deleted = subjectService.deleteSubject(id);
-        if (deleted) {
-            return ResponseEntity.ok(new ApiResponse_Subject(true, "Subject Deleted!"));
-        } else {
+        Optional<Subject> existingSubject = subjectService.findById(id);
+        if (existingSubject.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new ApiResponse_Subject(false, "No Subject Exists!"));
+        } else {
+            subjectService.deleteById(id);
+            return ResponseEntity.ok(new ApiResponse_Subject(true, "Subject Deleted!"));
         }
     }
 }
