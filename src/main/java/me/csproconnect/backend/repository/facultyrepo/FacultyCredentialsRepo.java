@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FacultyCredentialsRepo extends MongoRepository<FacultyCredentials, String> {
-    FacultyCredentials findByLoginid(int loginid);
+    FacultyCredentials findByLoginid(Long loginid);
 }
 

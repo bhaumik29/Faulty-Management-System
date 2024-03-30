@@ -11,7 +11,7 @@ public class FacultyDetailsService {
     @Autowired
     private FacultyDetailsRepo facultyRepository;
 
-    public FacultyDetails findByEmployeeId(int employeeId) {
+    public FacultyDetails findByEmployeeId(long employeeId) {
         return facultyRepository.findByEmployeeId(employeeId);
     }
 

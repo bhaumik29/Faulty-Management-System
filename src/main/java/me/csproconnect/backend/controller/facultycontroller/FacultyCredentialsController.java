@@ -17,7 +17,7 @@ public class FacultyCredentialsController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody FacultyCredentials request) {
-        int loginid = request.getLoginid();
+        long loginid = request.getLoginid();
         String password = request.getPassword();
         FacultyCredentials faculty = facultyService.findByLoginid(loginid);
         if (faculty == null || !password.equals(faculty.getPassword())) {

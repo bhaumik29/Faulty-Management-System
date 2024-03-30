@@ -14,7 +14,7 @@ import java.util.Date;
 public class FacultyDetails {
     @Id
     private String id;
-    private int employeeId;
+    private long employeeId;
     private String firstName;
     private String middleName;
     private String lastName;

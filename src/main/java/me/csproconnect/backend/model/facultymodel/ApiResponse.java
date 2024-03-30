@@ -20,11 +20,11 @@ public class ApiResponse {
     private FacultyCredentials facultyc;
     private FacultyDetails facultyd;
 //    private List<FacultyDetails> lfacultyd;
-    private int loginid;
+    private long loginid;
     private String id;
     private long c;
 
-    public ApiResponse(boolean success, String message, int loginid, String id) {
+    public ApiResponse(boolean success, String message, long loginid, String id) {
         this.success = success;
         this.message = message;
         this.loginid = loginid;
@@ -41,7 +41,7 @@ public class ApiResponse {
         this.id = id;
     }
 
-    public ApiResponse(boolean success, int loginid, String id) {
+    public ApiResponse(boolean success, long loginid, String id) {
         this.success = success;
         this.loginid = loginid;
         this.id = id;
