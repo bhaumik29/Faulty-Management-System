@@ -11,7 +11,7 @@ public class FacultyDetailsService {
     @Autowired
     private FacultyDetailsRepo facultyRepository;
 
-    public FacultyDetails findByEmployeeId(long employeeId) {
+    public FacultyDetails findByEmployeeId(Long employeeId) {
         return facultyRepository.findByEmployeeId(employeeId);
     }
 
@@ -34,7 +34,7 @@ public class FacultyDetailsService {
         facultyRepository.deleteById(id);
     }
 
-    public long countFaculties() {
+    public Long countFaculties() {
         return facultyRepository.count();
     }
 }

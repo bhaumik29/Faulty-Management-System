@@ -61,7 +61,7 @@ public class StudentDetailsController {
     @GetMapping("/count")
     public ResponseEntity<?> getCount() {
         try {
-            long count = studentDetailsService.getCount();
+            Long count = studentDetailsService.getCount();
             return ResponseEntity.ok(new ApiResponse(true, "Count Successful!", count));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

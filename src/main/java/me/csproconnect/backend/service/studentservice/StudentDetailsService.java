@@ -11,7 +11,7 @@ public class StudentDetailsService {
     @Autowired
     private StudentDetailsRepo studentDetailsRepository;
 
-    public StudentDetails findByEnrollmentNo(long enrollmentNo) {
+    public StudentDetails findByEnrollmentNo(Long enrollmentNo) {
         return studentDetailsRepository.findByEnrollmentNo(enrollmentNo);
     }
 
@@ -34,7 +34,7 @@ public class StudentDetailsService {
         studentDetailsRepository.deleteById(id);
     }
 
-    public long getCount() {
+    public Long getCount() {
         return studentDetailsRepository.count();
     }
 }

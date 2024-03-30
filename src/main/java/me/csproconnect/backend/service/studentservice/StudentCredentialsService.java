@@ -11,7 +11,7 @@ public class StudentCredentialsService {
     @Autowired
     private StudentCredentialsRepo studentRepository;
 
-    public StudentCredentials findByLoginid(int loginid) {
+    public StudentCredentials findByLoginid(Long loginid) {
         return studentRepository.findByLoginid(loginid);
     }
 

@@ -14,12 +14,12 @@ import java.util.Date;
 public class FacultyDetails {
     @Id
     private String id;
-    private long employeeId;
+    private Long employeeId;
     private String firstName;
     private String middleName;
     private String lastName;
     private String email;
-    private long phoneNumber;
+    private Long phoneNumber;
     private String gender;
     private int experience;
     private String post;

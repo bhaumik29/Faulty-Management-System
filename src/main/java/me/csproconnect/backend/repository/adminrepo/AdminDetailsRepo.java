@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AdminDetailsRepo extends MongoRepository<AdminDetails, String> {
     @Query("{employeeId:?0}")
-    AdminDetails findByEmployeeId(int employeeId);
+    AdminDetails findByEmployeeId(Long employeeId);
 }

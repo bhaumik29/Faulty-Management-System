@@ -17,7 +17,7 @@ public class AdminCredentialsController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AdminCredentials request) {
-        int loginid = request.getLoginid();
+        Long loginid = request.getLoginid();
         String password = request.getPassword();
         AdminCredentials admin = adminService.findByLoginid(loginid);
         if (admin == null || !password.equals(admin.getPassword())) {

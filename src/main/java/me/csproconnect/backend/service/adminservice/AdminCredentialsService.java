@@ -12,7 +12,7 @@ public class AdminCredentialsService {
     @Autowired
     private AdminCredentialsRepo adminRepository;
 
-    public AdminCredentials findByLoginid(int loginid) {
+    public AdminCredentials findByLoginid(Long loginid) {
         return adminRepository.findByLoginid(loginid);
     }
 

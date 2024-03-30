@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StudentDetailsRepo extends MongoRepository<StudentDetails, String> {
-    StudentDetails findByEnrollmentNo(long enrollmentNo);
+    StudentDetails findByEnrollmentNo(Long enrollmentNo);
 }
 

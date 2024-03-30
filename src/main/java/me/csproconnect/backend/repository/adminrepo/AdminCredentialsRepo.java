@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AdminCredentialsRepo extends MongoRepository<AdminCredentials, String> {
-    AdminCredentials findByLoginid(int loginid);
+    AdminCredentials findByLoginid(Long loginid);
 }
 

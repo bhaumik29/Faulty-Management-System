@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class AdminCredentials {
     @Id
     private String id;
-    private int loginid;
+    private Long loginid;
     private String password;
 
 

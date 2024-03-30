@@ -17,11 +17,11 @@ public class ApiResponse {
     private String message;
     private StudentCredentials studentc;
     private StudentDetails studentd;
-    private int loginid;
+    private Long loginid;
     private String id;
-    private long c;
+    private Long c;
 
-    public ApiResponse(boolean success, String message, long c) {
+    public ApiResponse(boolean success, String message, Long c) {
         this.success = success;
         this.message = message;
         this.c = c;
@@ -33,7 +33,7 @@ public class ApiResponse {
         this.studentd = studentd;
     }
 
-    public ApiResponse(boolean success, String message, int loginid, String id) {
+    public ApiResponse(boolean success, String message, Long loginid, String id) {
         this.success = success;
         this.message = message;
         this.loginid = loginid;

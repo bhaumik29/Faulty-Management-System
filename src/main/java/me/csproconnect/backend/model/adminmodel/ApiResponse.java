@@ -16,13 +16,13 @@ public class ApiResponse {
     private String message;
     private AdminCredentials adminc;
     private AdminDetails admind;
-    private int loginid;
+    private Long loginid;
     private String id;
 
 
 
 
-    public ApiResponse(boolean success, String message, int loginid, String id) {
+    public ApiResponse(boolean success, String message, Long loginid, String id) {
         this.success = success;
         this.message = message;
         this.loginid = loginid;
@@ -34,7 +34,7 @@ public class ApiResponse {
         this.id = id;
     }
 
-    public ApiResponse(boolean success, int loginid, String id) {
+    public ApiResponse(boolean success, Long loginid, String id) {
         this.success = success;
         this.loginid = loginid;
         this.id = id;

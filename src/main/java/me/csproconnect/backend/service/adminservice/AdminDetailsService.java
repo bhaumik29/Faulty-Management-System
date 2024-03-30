@@ -11,7 +11,7 @@ public class AdminDetailsService {
     @Autowired
     private AdminDetailsRepo adminRepository;
 
-    public AdminDetails findByEmployeeId(int employeeId) {
+    public AdminDetails findByEmployeeId(Long employeeId) {
         return adminRepository.findByEmployeeId(employeeId);
     }
 

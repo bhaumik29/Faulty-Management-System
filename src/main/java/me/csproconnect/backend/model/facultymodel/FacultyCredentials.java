@@ -15,7 +15,7 @@ import java.util.Date;
 public class FacultyCredentials {
     @Id
     private String id;
-    private long loginid;
+    private Long loginid;
     private String password;
     private Date timestamp;
 }

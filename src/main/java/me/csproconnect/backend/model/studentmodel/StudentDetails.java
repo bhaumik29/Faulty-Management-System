@@ -16,12 +16,12 @@ import java.util.Date;
 public class StudentDetails {
     @Id
     private String id;
-    private long enrollmentNo;
+    private Long enrollmentNo;
     private String firstName;
     private String middleName;
     private String lastName;
     private String email;
-    private long phoneNumber;
+    private Long phoneNumber;
 
     @Field("class")
     private String className; // here "class" can not be used as it is reserved

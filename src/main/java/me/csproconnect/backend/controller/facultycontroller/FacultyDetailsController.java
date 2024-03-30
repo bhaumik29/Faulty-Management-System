@@ -66,7 +66,7 @@ public class FacultyDetailsController {
     @GetMapping("/count")
     public ResponseEntity<?> count() {
         try {
-            long count = facultyService.countFaculties();
+            Long count = facultyService.countFaculties();
             return ResponseEntity.ok(new ApiResponse(true, "Count Successful!", count));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

@@ -19,7 +19,7 @@ public class AdminDetails {
     private String id;
 
     @Field("employeeId")
-    private int employeeId;
+    private Long employeeId;
 
     @Field("firstName")
     private String firstName;
@@ -34,7 +34,7 @@ public class AdminDetails {
     private String email;
 
     @Field("phoneNumber")
-    private long phoneNumber;
+    private Long phoneNumber;
 
     @Field("gender")
     private String gender;
