@@ -19,7 +19,7 @@ public class FacultyDetails {
     private String middleName;
     private String lastName;
     private String email;
-    private String phoneNumber;
+    private long phoneNumber;
     private String gender;
     private int experience;
     private String post;

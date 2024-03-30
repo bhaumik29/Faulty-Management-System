@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
 
@@ -20,8 +21,11 @@ public class StudentDetails {
     private String middleName;
     private String lastName;
     private String email;
-    private String phoneNumber;
+    private long phoneNumber;
+
+    @Field("class")
     private String className; // here "class" can not be used as it is reserved
+
     private String gender;
     private Date timestamp;
 }
