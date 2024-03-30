@@ -16,7 +16,6 @@ public class ApiResponse {
     private String message;
     private AdminCredentials adminc;
     private AdminDetails admind;
-    private Object user;
     private int loginid;
     private String id;
 
@@ -51,10 +50,5 @@ public class ApiResponse {
         this.success = success;
         this.message = message;
         this.admind = admind;
-    }
-    public ApiResponse(boolean success, String message, Object user) {
-        this.success = success;
-        this.message = message;
-        this.user = user;
     }
 }

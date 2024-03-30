@@ -17,12 +17,12 @@ public class AdminDetailsController {
 
     @PostMapping("/getDetails")
     public ResponseEntity<?> getDetails(@RequestBody AdminDetails admin) {
-        Object user  = adminService.findByEmployeeId(admin.getEmployeeId());
-        if (user == null) {
+        AdminDetails foundAdmin  = adminService.findByEmployeeId(admin.getEmployeeId());
+        if (foundAdmin == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new ApiResponse(false, "No Admin Found"));
         }
-        return ResponseEntity.ok(new ApiResponse(true, "Admin Details Found!", user));
+        return ResponseEntity.ok(new ApiResponse(true, "Admin Details Found!",foundAdmin));
     }
 
     @PostMapping("/addDetails")
