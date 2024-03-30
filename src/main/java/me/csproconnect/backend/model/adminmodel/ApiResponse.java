@@ -46,6 +46,12 @@ public class ApiResponse {
         this.message = message;
         this.adminc = adminc;
     }
+
+    public ApiResponse(boolean success, String message, AdminDetails admind) {
+        this.success = success;
+        this.message = message;
+        this.admind = admind;
+    }
     public ApiResponse(boolean success, String message, Object user) {
         this.success = success;
         this.message = message;

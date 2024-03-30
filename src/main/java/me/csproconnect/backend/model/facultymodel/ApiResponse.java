@@ -21,6 +21,7 @@ public class ApiResponse {
     private FacultyDetails facultyd;
 //    private List<FacultyDetails> lfacultyd;
     private int loginid;
+    private Object user;
     private String id;
     private long c;
 
@@ -61,5 +62,11 @@ public class ApiResponse {
         this.success = success;
         this.message = message;
         this.facultyd = facultyd;
+    }
+
+    public ApiResponse(boolean success, String message, Object user) {
+        this.success = success;
+        this.message = message;
+        this.user = user;
     }
 }

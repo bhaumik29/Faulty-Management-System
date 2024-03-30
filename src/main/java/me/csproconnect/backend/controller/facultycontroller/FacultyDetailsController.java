@@ -18,12 +18,12 @@ public class FacultyDetailsController {
     @PostMapping("/getDetails")
     public ResponseEntity<?> getDetails(@RequestBody FacultyDetails request) {
         try {
-            FacultyDetails faculty = facultyService.findByEmployeeId(request.getEmployeeId());
-            if (faculty == null) {
+            FacultyDetails user = facultyService.findByEmployeeId(request.getEmployeeId());
+            if (user == null) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body(new ApiResponse(false, "No Faculty Found"));
             }
-            return ResponseEntity.ok(new ApiResponse(true, "Faculty Details Found!", faculty));
+            return ResponseEntity.ok(new ApiResponse(true, "Faculty Details Found!", user));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponse(false, "Internal Server Error"));
