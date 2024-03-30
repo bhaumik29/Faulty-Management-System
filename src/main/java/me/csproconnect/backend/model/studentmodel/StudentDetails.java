@@ -22,10 +22,7 @@ public class StudentDetails {
     private String lastName;
     private String email;
     private Long phoneNumber;
-
-    @Field("class")
-    private String className; // here "class" can not be used as it is reserved
-
+    private String classn; // here "class" can not be used as it is reserved
     private String gender;
     private Date timestamp;
 }
