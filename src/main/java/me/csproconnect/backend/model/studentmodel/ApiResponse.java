@@ -17,9 +17,16 @@ public class ApiResponse {
     private String message;
     private StudentCredentials studentc;
     private StudentDetails studentd;
+    private List<StudentDetails> studentsInClass;
     private Long loginid;
     private String id;
     private Long c;
+
+    public ApiResponse(boolean success, String message, List<StudentDetails> studentsInClass) {
+        this.success = success;
+        this.message = message;
+        this.studentsInClass = studentsInClass;
+    }
 
     public ApiResponse(boolean success, String message, Long c) {
         this.success = success;

@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/student/details")
 public class StudentDetailsController {
@@ -18,17 +20,33 @@ public class StudentDetailsController {
     @PostMapping("/getDetails")
     public ResponseEntity<?> getDetails(@RequestBody StudentDetails request) {
         try {
-            StudentDetails studentDetails = studentDetailsService.findByEnrollmentNo(request.getEnrollmentNo());
-            if (studentDetails == null) {
+            if (request.getEnrollmentNo() != null) {
+                // Request for a specific student's details
+                StudentDetails studentDetails = studentDetailsService.findByEnrollmentNo(request.getEnrollmentNo());
+                if (studentDetails == null) {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                            .body(new ApiResponse(false, "No Student Found"));
+                }
+                return ResponseEntity.ok(new ApiResponse(true, "Student Details Found!", studentDetails));
+            } else if (request.getClassn() != null) {
+                // Request for all students in a class
+                List<StudentDetails> studentsInClass = studentDetailsService.findByClassn(request.getClassn());
+                if (studentsInClass.isEmpty()) {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                            .body(new ApiResponse(false, "No Students Found in this class"));
+                }
+                return ResponseEntity.ok(new ApiResponse(true, "Students Found in this class!", studentsInClass));
+            } else {
+                // Invalid request
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(new ApiResponse(false, "No Student Found"));
+                        .body(new ApiResponse(false, "Invalid Request"));
             }
-            return ResponseEntity.ok(new ApiResponse(true, "Student Details Found!", studentDetails));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponse(false, "Internal Server Error"));
         }
     }
+
 
     @PostMapping("/addDetails")
     public ResponseEntity<?> addDetails(@RequestBody StudentDetails studentDetails) {
