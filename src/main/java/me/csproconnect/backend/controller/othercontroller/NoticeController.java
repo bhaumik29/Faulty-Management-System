@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,14 +18,17 @@ public class NoticeController {
     @Autowired
     private NoticeService noticeService;
 
-    @GetMapping("/getNotice")
-    public ResponseEntity<?> getNotice() {
-        List<Notice> notices = noticeService.getNotices();
-        if (notices.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(new ApiResponse_Notice(false, "No Notice Available!"));
+    @PostMapping("/getNotice")
+    public ResponseEntity<?> getNoticeByTypes(@RequestBody List<String> types) {
+        List<Notice> notices = new ArrayList<>();
+        for (String type : types) {
+            notices.addAll(noticeService.getByType(type));
         }
-        return ResponseEntity.ok(new ApiResponse_Notice(true, "Notice Get Successfully", notices));
+        if (!notices.isEmpty()) {
+            return ResponseEntity.ok(new ApiResponse_Notice(true, "Notices Fetched Successfully", notices));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse_Notice(false, "No Notices Available!"));
+        }
     }
 
     @PostMapping("/addNotice")
