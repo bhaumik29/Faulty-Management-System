@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
+import java.util.List;
 
 @Document(collection = "notices") // Specify the MongoDB collection name
 @Data
@@ -19,5 +20,6 @@ public class Notice {
     private String description;
     private String type;
     private String link;
-    private Date timestamp;
+    private Date timestamp = new Date();
+    private List<String> typelist;
 }

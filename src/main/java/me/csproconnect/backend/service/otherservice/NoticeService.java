@@ -14,7 +14,8 @@ public class NoticeService {
     @Autowired
     private NoticeRepo noticeRepository;
 
-    public List<Notice> getByType(String type) {return noticeRepository.findByType(type);
+    public List<Notice> getByType(String type) {
+        return noticeRepository.findByType(type);
     }
 
     public Notice addNotice(Notice notice) {

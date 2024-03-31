@@ -19,9 +19,10 @@ public class NoticeController {
     private NoticeService noticeService;
 
     @PostMapping("/getNotice")
-    public ResponseEntity<?> getNoticeByTypes(@RequestBody List<String> types) {
+    public ResponseEntity<?> getNotice(@RequestBody Notice request) {
         List<Notice> notices = new ArrayList<>();
-        for (String type : types) {
+        List<String> temp = request.getTypelist();
+        for (String type : temp) {
             notices.addAll(noticeService.getByType(type));
         }
         if (!notices.isEmpty()) {
@@ -30,6 +31,19 @@ public class NoticeController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse_Notice(false, "No Notices Available!"));
         }
     }
+
+//    @PostMapping("/getNotice")
+//    public ResponseEntity<?> getNoticeByTypes(@RequestBody List<String> types) {
+//        List<Notice> notices = new ArrayList<>();
+//        for (String type : types) {
+//            notices.addAll(noticeService.getByType(type));
+//        }
+//        if (!notices.isEmpty()) {
+//            return ResponseEntity.ok(new ApiResponse_Notice(true, "Notices Fetched Successfully", notices));
+//        } else {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse_Notice(false, "No Notices Available!"));
+//        }
+//    }
 
     @PostMapping("/addNotice")
     public ResponseEntity<?> addNotice(@RequestBody Notice notice) {
