@@ -5,6 +5,8 @@ import me.csproconnect.backend.repository.facultyrepo.FacultyDetailsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FacultyDetailsService {
 
@@ -13,6 +15,9 @@ public class FacultyDetailsService {
 
     public FacultyDetails findByEmployeeId(Long employeeId) {
         return facultyRepository.findByEmployeeId(employeeId);
+    }
+    public List<FacultyDetails> findBy_class(String _class) {
+        return facultyRepository.findBy_class(_class);
     }
 
     public FacultyDetails addFaculty(FacultyDetails faculty) {

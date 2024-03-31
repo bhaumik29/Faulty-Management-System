@@ -2,11 +2,14 @@ package me.csproconnect.backend.controller.admincontroller;
 
 import me.csproconnect.backend.model.adminmodel.AdminDetails;
 import me.csproconnect.backend.model.adminmodel.ApiResponse;
+import me.csproconnect.backend.model.facultymodel.FacultyDetails;
 import me.csproconnect.backend.service.adminservice.AdminDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin/details")
@@ -16,13 +19,32 @@ public class AdminDetailsController {
     private AdminDetailsService adminService;
 
     @PostMapping("/getDetails")
-    public ResponseEntity<?> getDetails(@RequestBody AdminDetails admin) {
-        AdminDetails foundAdmin  = adminService.findByEmployeeId(admin.getEmployeeId());
-        if (foundAdmin == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(new ApiResponse(false, "No Admin Found"));
+    public ResponseEntity<?> getDetails(@RequestBody AdminDetails request) {
+        try {
+            if (request.getEmployeeId() != null) {
+                AdminDetails foundAdmin = adminService.findByEmployeeId(request.getEmployeeId());
+                if (foundAdmin == null) {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                            .body(new ApiResponse(false, "No Admin Found"));
+                }
+                return ResponseEntity.ok(new ApiResponse(true, "Admin Details Found!", foundAdmin));
+            } else if(request.get_class() !=null){
+                // Request for all faculties
+                List<AdminDetails> Admins = adminService.findBy_class(request.get_class());
+                if (Admins.isEmpty()) {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                            .body(new ApiResponse(false, "No Admin Found"));
+                }
+                return ResponseEntity.ok(new ApiResponse(true, "Admins Found!", Admins));
+            } else {
+                // Invalid request
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(new ApiResponse(false, "Invalid Request"));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(false, "Internal Server Error"));
         }
-        return ResponseEntity.ok(new ApiResponse(true, "Admin Details Found!",foundAdmin));
     }
 
     @PostMapping("/addDetails")

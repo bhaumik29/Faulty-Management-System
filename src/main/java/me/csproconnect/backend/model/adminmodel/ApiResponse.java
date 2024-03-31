@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.schema.TypedJsonSchemaObject;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,9 +20,13 @@ public class ApiResponse {
     private AdminDetails admind;
     private Long loginid;
     private String id;
+    private List<AdminDetails> admins;
 
-
-
+    public ApiResponse(boolean success, String message, List<AdminDetails> admins) {
+        this.success = success;
+        this.message = message;
+        this.admins = admins;
+    }
 
     public ApiResponse(boolean success, String message, Long loginid, String id) {
         this.success = success;

@@ -45,4 +45,6 @@ public class AdminDetails {
     @Field("timestamp")
     private Date timestamp = new Date();
 
+    private String _class;
+
 }

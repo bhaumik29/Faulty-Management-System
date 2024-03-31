@@ -19,7 +19,7 @@ public class ApiResponse {
     private String message;
     private FacultyCredentials facultyc;
     private FacultyDetails facultyd;
-//    private List<FacultyDetails> lfacultyd;
+    private List<FacultyDetails> lfacultyd;
     private Long loginid;
     private String id;
     private Long c;
@@ -52,11 +52,11 @@ public class ApiResponse {
         this.message = message;
         this.facultyc = facultyc;
     }
-//    public ApiResponse(boolean success, String message, List<FacultyDetails> lfacultyc) {
-//        this.success = success;
-//        this.message = message;
-//        this.lfacultyd = lfacultyd;
-//    }
+    public ApiResponse(boolean success, String message, List<FacultyDetails> lfacultyd) {
+        this.success = success;
+        this.message = message;
+        this.lfacultyd = lfacultyd;
+    }
     public ApiResponse(boolean success, String message, FacultyDetails facultyd) {
         this.success = success;
         this.message = message;

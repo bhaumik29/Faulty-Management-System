@@ -1,9 +1,12 @@
 package me.csproconnect.backend.service.adminservice;
 
 import me.csproconnect.backend.model.adminmodel.AdminDetails;
+import me.csproconnect.backend.model.facultymodel.FacultyDetails;
 import me.csproconnect.backend.repository.adminrepo.AdminDetailsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AdminDetailsService {
@@ -13,6 +16,9 @@ public class AdminDetailsService {
 
     public AdminDetails findByEmployeeId(Long employeeId) {
         return adminRepository.findByEmployeeId(employeeId);
+    }
+    public List<AdminDetails> findBy_class(String _class) {
+        return adminRepository.findBy_class(_class);
     }
 
     public AdminDetails addAdmin(AdminDetails admin) {

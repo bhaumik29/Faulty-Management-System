@@ -25,5 +25,6 @@ public class FacultyDetails {
     private String post;
     private String profile;
     private Date timestamp;
+    private String _class;
 
 }
