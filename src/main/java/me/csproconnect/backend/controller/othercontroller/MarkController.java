@@ -20,8 +20,7 @@ public class MarkController {
         try {
             Mark marks = marksService.findByEnrollmentNo(request.getEnrollmentNo());
             if (marks == null) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(new ApiResponse_Mark(false, "Marks Not Available"));
+                return ResponseEntity.ok(new ApiResponse_Mark(false, "Marks Not Available"));
             }
             return ResponseEntity.ok(new ApiResponse_Mark(true, "All Marks Loaded!", marks));
         } catch (Exception e) {

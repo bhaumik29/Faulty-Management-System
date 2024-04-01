@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
+import java.util.List;
 
 @Document(collection = "timetables") // Specify the MongoDB collection name
 @Data
@@ -17,6 +18,7 @@ public class Timetable {
     private String id;
     private String link;
     private int semester;
-    private Date timestamp;
+    private Date timestamp = new Date();
+    private List<Integer> semList;
 
 }

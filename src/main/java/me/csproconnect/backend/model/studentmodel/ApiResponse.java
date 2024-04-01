@@ -47,8 +47,8 @@ public class ApiResponse {
         this.id = id;
     }
 
-    public ApiResponse(boolean success, String message) {
+    public ApiResponse(boolean success, String id) {
         this.success = success;
-        this.message = message;
+        this.id = id;
     }
 }

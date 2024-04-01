@@ -4,11 +4,14 @@ import me.csproconnect.backend.model.othermodel.ApiResponse_Timetable;
 import me.csproconnect.backend.model.othermodel.Timetable;
 import me.csproconnect.backend.repository.otherrepo.TimetableRepo;
 import me.csproconnect.backend.service.otherservice.TimetableService;
+import org.apache.catalina.util.Introspection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -20,11 +23,17 @@ public class TimetableController {
     private TimetableService timetableService;
 
     @PostMapping("/getTimetable")
-    public ResponseEntity<?> getTimetable(@RequestBody Map<String, Integer> request) {
-        int semester = request.get("semester");
-        Timetable timetable = timetableService.findBySemester(semester);
-        if (timetable != null) {
-            return ResponseEntity.ok(timetable);
+    public ResponseEntity<?> getTimetable(@RequestBody Timetable request) {
+        List<Timetable> timetables = new ArrayList<>();
+        List <Integer> temp = request.getSemList();
+        for(Integer semester : temp){
+            Timetable timetable = timetableService.findBySemester(semester);
+            if(timetable != null) {
+                timetables.add(timetable);
+            }
+        }
+        if (!timetables.isEmpty()) {
+            return ResponseEntity.ok(new ApiResponse_Timetable(true,"Timetables Fetched Successfully",timetables));
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new ApiResponse_Timetable(false, "Timetable Not Found"));
