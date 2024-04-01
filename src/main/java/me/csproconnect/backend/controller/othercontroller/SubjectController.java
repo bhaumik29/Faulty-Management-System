@@ -19,15 +19,36 @@ public class SubjectController {
     private SubjectService subjectService;
 
         @PostMapping("/getSubject")
-        public ResponseEntity<?> getSubjectBySemester(@RequestBody Map<String, Integer> request) {
-            int semester = request.get("semester");
-            List<Subject> subjects = subjectService.getSubjectsBySemester(semester);
-            if (subjects.isEmpty()) {
-                return ResponseEntity.ok(new ApiResponse_Subject(false, "No Subject Available", subjects));
-            } else {
-                return ResponseEntity.ok(new ApiResponse_Subject(true, "All Subjects Loaded!", subjects));
-            }
+    public ResponseEntity<?> getSubjectBySemester(@RequestBody Map<String, Integer> request) {
+        int semester = request.get("semester");
+        List<Subject> subjects = subjectService.getSubjectsBySemester(semester);
+        if (subjects.isEmpty()) {
+            return ResponseEntity.ok(new ApiResponse_Subject(false, "No Subject Available", subjects));
+        } else {
+            return ResponseEntity.ok(new ApiResponse_Subject(true, "All Subjects Loaded!", subjects));
         }
+    }
+
+
+    @GetMapping("/getAllSubjects")
+    public ResponseEntity<?> getAllSubjects(){
+            List<Subject> subjects = subjectService.allSubjects();
+        if (subjects.isEmpty()) {
+            return ResponseEntity.ok(new ApiResponse_Subject(false, "No Subject Available", subjects));
+        } else {
+            return ResponseEntity.ok(new ApiResponse_Subject(true, "All Subjects Loaded!", subjects));
+        }
+        }
+
+//    @GetMapping("/getSubjects")
+//    public ResponseEntity<?> getSubjects{
+//        List<Subject> subjects = subjectService.getSubjects();
+//        if (subjects.isEmpty()) {
+//            return ResponseEntity.ok(new ApiResponse_Subject(false, "No Subject Available", subjects));
+//        } else {
+//            return ResponseEntity.ok(new ApiResponse_Subject(true, "All Subjects Loaded!", subjects));
+//        }
+//    }
 
     @PostMapping("/addSubject")
     public ResponseEntity<?> addSubject(@RequestBody Subject subjectRequest) {

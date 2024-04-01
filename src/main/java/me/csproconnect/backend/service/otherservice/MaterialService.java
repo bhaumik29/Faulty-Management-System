@@ -14,8 +14,8 @@ public class MaterialService {
     @Autowired
     private MaterialRepo materialRepository;
 
-    public List<Material> getMaterials() {
-        return materialRepository.findAll();
+    public List<Material> getMaterialsBySubject(String subject) {
+        return materialRepository.findBySubject(subject);
     }
 
     public Material getMaterialById(String id) {

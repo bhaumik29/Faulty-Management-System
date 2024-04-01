@@ -17,14 +17,14 @@ public class MaterialController {
     @Autowired
     private MaterialService materialService;
 
-    @GetMapping("/getMaterial")
-    public ResponseEntity<?> getMaterial() {
-        List<Material> materials = materialService.getMaterials();
+    @PostMapping("/getMaterial")
+    public ResponseEntity<?> getMaterialBySubject(@RequestBody Material request) {
+        String subject = request.getSubject();
+        List<Material> materials = materialService.getMaterialsBySubject(subject);
         if (materials.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(new ApiResponse_Material(false, "No Material Available!"));
+            return ResponseEntity.ok(new ApiResponse_Material(false, "No Material Available!"));
         }
-        return ResponseEntity.ok(new ApiResponse_Material(true, "Material Found!", materials));
+        return ResponseEntity.ok(new ApiResponse_Material(true, "Materials Found!", materials));
     }
 
     @PostMapping("/addMaterial")

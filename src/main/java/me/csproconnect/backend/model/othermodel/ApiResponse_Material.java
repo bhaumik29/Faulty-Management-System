@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class ApiResponse_Material {
     private boolean success;
     private String message;
-    private Object data;
+    private Object material;
 
     public ApiResponse_Material(boolean success, String message) {
         this.success = success;

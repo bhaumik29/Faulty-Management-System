@@ -10,5 +10,7 @@ import java.util.Optional;
 @Repository
 public interface SubjectRepo extends MongoRepository<Subject, String> {
     List<Subject> findBySemester(int semester);
+
+//    List<Subject> findAll();
     Optional<Subject> findByCode(int code);
 }

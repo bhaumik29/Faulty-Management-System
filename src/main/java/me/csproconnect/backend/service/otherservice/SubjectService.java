@@ -18,6 +18,14 @@ public class SubjectService {
         return subjectRepository.findBySemester(semester);
     }
 
+//    public List<Subject> getSubjects() {
+//        return subjectRepository.findAll();
+//    }
+
+    public List<Subject> allSubjects(){
+        return subjectRepository.findAll();
+    }
+
     public Optional<Subject> findByCode(int code) {
         return subjectRepository.findByCode(code);
     }
