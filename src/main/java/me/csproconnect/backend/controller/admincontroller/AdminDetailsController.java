@@ -24,26 +24,22 @@ public class AdminDetailsController {
             if (request.getEmployeeId() != null) {
                 AdminDetails foundAdmin = adminService.findByEmployeeId(request.getEmployeeId());
                 if (foundAdmin == null) {
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                            .body(new ApiResponse(false, "No Admin Found"));
+                    return ResponseEntity.ok(new ApiResponse(false, "No Admin Found"));
                 }
                 return ResponseEntity.ok(new ApiResponse(true, "Admin Details Found!", foundAdmin));
             } else if(request.get_class() !=null){
                 // Request for all faculties
                 List<AdminDetails> Admins = adminService.findBy_class(request.get_class());
                 if (Admins.isEmpty()) {
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                            .body(new ApiResponse(false, "No Admin Found"));
+                    return ResponseEntity.ok(new ApiResponse(false, "No Admin Found"));
                 }
                 return ResponseEntity.ok(new ApiResponse(true, "Admins Found!", Admins));
             } else {
                 // Invalid request
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(new ApiResponse(false, "Invalid Request"));
+                return ResponseEntity.ok(new ApiResponse(false, "Invalid Request"));
             }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ApiResponse(false, "Internal Server Error"));
+            return ResponseEntity.ok(new ApiResponse(false, "Internal Server Error"));
         }
     }
 

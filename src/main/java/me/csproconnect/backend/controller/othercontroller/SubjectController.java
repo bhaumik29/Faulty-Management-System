@@ -23,8 +23,7 @@ public class SubjectController {
             int semester = request.get("semester");
             List<Subject> subjects = subjectService.getSubjectsBySemester(semester);
             if (subjects.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body(new ApiResponse_Subject(false, "No Subject Available"));
+                return ResponseEntity.ok(new ApiResponse_Subject(false, "No Subject Available", subjects));
             } else {
                 return ResponseEntity.ok(new ApiResponse_Subject(true, "All Subjects Loaded!", subjects));
             }

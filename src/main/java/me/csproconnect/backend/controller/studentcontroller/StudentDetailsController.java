@@ -24,26 +24,22 @@ public class StudentDetailsController {
                 // Request for a specific student's details
                 StudentDetails studentDetails = studentDetailsService.findByEnrollmentNo(request.getEnrollmentNo());
                 if (studentDetails == null) {
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                            .body(new ApiResponse(false, "No Student Found"));
+                    return ResponseEntity.ok(new ApiResponse(false, "No Student Found"));
                 }
                 return ResponseEntity.ok(new ApiResponse(true, "Student Details Found!", studentDetails));
             } else if (request.getClassn() != null) {
                 // Request for all students in a class
                 List<StudentDetails> studentsInClass = studentDetailsService.findByClassn(request.getClassn());
                 if (studentsInClass.isEmpty()) {
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                            .body(new ApiResponse(false, "No Students Found in this class"));
+                    return ResponseEntity.ok(new ApiResponse(false, "No Students Found in this class"));
                 }
                 return ResponseEntity.ok(new ApiResponse(true, "Students Found in this class!", studentsInClass));
             } else {
                 // Invalid request
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(new ApiResponse(false, "Invalid Request"));
+                return ResponseEntity.ok(new ApiResponse(false, "Invalid Request"));
             }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ApiResponse(false, "Internal Server Error"));
+            return ResponseEntity.ok(new ApiResponse(false, "Internal Server Error"));
         }
     }
 
