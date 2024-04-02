@@ -32,19 +32,19 @@ public class MarkController {
         }
     }
 
-    @PostMapping("/addMarks")
-    public ResponseEntity<?> addMarks(@RequestBody Mark marks) {
-        try {
-            Mark savedMarks = marksService.findByEnrollmentNo(marks.getEnrollmentNo());
-            if(savedMarks == null){
-                Mark marks =
-            }
-            return ResponseEntity.ok(new ApiResponse_Mark(true, "Marks Added/Updated!", savedMarks));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ApiResponse_Mark(false, "Internal Server Error"));
-        }
-    }
+//    @PostMapping("/addMarks")
+//    public ResponseEntity<?> addMarks(@RequestBody Mark marks) {
+//        try {
+//            Mark savedMarks = marksService.findByEnrollmentNo(marks.getEnrollmentNo());
+//            if(savedMarks == null){
+//                Mark marks =
+//            }
+//            return ResponseEntity.ok(new ApiResponse_Mark(true, "Marks Added/Updated!", savedMarks));
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body(new ApiResponse_Mark(false, "Internal Server Error"));
+//        }
+//    }
 
     @PostMapping("/addMarks")
     public ResponseEntity<?> addMarks(@RequestBody Mark request) {
@@ -56,17 +56,17 @@ public class MarkController {
             if (existingMark != null) {
                 existingMark.setInternal(internal);
                 marksService.save(existingMark);
-                return ResponseEntity.ok().body(new ApiResponse(true, "Marks Added"));
+                return ResponseEntity.ok().body(new ApiResponse_Mark(true, "Marks Added"));
             } else {
-                Marks newMark = new Marks();
+                Mark newMark = new Mark();
                 newMark.setEnrollmentNo(enrollmentNo);
                 newMark.setInternal(internal);
-                marksRepository.save(newMark);
-                return ResponseEntity.ok().body(new ApiResponse(true, "Marks Added"));
+                marksService.save(newMark);
+                return ResponseEntity.ok().body(new ApiResponse_Mark(true, "Marks Added"));
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ApiResponse(false, "Internal Server Error"));
+                    .body(new ApiResponse_Mark(false, "Internal Server Error"));
         }
     }
 
