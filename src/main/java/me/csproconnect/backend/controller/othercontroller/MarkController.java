@@ -50,21 +50,30 @@ public class MarkController {
     public ResponseEntity<?> addMarks(@RequestBody Mark request) {
         try {
             Long enrollmentNo = request.getEnrollmentNo();
-            Map<String, Integer> internal = request.getInternal();
+            Map<String, Integer> requestedInternalMarks = request.getInternal();
 
             Mark existingMark = marksService.findByEnrollmentNo(enrollmentNo);
             if (existingMark != null) {
-                existingMark.setInternal(internal);
+                // Get the existing internal marks map
+                Map<String, Integer> existingInternalMarks = existingMark.getInternal();
+                if (existingInternalMarks != null) {
+                    // Add or update marks from the requested internal marks map
+                    requestedInternalMarks.forEach((subject, marks) -> existingInternalMarks.merge(subject, marks, (v1, v2) -> v2));
+                } else {
+                    // If there were no existing internal marks, set the requested map as is
+                    existingMark.setInternal(requestedInternalMarks);
+                }
                 marksService.save(existingMark);
-                return ResponseEntity.ok().body(new ApiResponse_Mark(true, "Marks Added"));
+                return ResponseEntity.ok().body(new ApiResponse_Mark(true, "Marks Updated"));
             } else {
                 Mark newMark = new Mark();
                 newMark.setEnrollmentNo(enrollmentNo);
-                newMark.setInternal(internal);
+                newMark.setInternal(requestedInternalMarks);
                 marksService.save(newMark);
                 return ResponseEntity.ok().body(new ApiResponse_Mark(true, "Marks Added"));
             }
         } catch (Exception e) {
+            e.printStackTrace(); // For debugging, it's better to log the stack trace
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponse_Mark(false, "Internal Server Error"));
         }
