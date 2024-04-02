@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/marks")
 public class MarkController {
@@ -29,14 +32,41 @@ public class MarkController {
         }
     }
 
-    @PostMapping("/addOrUpdateMarks")
-    public ResponseEntity<?> addOrUpdateMarks(@RequestBody Mark marks) {
+    @PostMapping("/addMarks")
+    public ResponseEntity<?> addMarks(@RequestBody Mark marks) {
         try {
-            Mark savedMarks = marksService.addOrUpdateMarks(marks);
+            Mark savedMarks = marksService.findByEnrollmentNo(marks.getEnrollmentNo());
+            if(savedMarks == null){
+                Mark marks =
+            }
             return ResponseEntity.ok(new ApiResponse_Mark(true, "Marks Added/Updated!", savedMarks));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponse_Mark(false, "Internal Server Error"));
+        }
+    }
+
+    @PostMapping("/addMarks")
+    public ResponseEntity<?> addMarks(@RequestBody Mark request) {
+        try {
+            Long enrollmentNo = request.getEnrollmentNo();
+            Map<String, Integer> internal = request.getInternal();
+
+            Mark existingMark = marksService.findByEnrollmentNo(enrollmentNo);
+            if (existingMark != null) {
+                existingMark.setInternal(internal);
+                marksService.save(existingMark);
+                return ResponseEntity.ok().body(new ApiResponse(true, "Marks Added"));
+            } else {
+                Marks newMark = new Marks();
+                newMark.setEnrollmentNo(enrollmentNo);
+                newMark.setInternal(internal);
+                marksRepository.save(newMark);
+                return ResponseEntity.ok().body(new ApiResponse(true, "Marks Added"));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(false, "Internal Server Error"));
         }
     }
 
