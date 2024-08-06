@@ -92,14 +92,14 @@ Try it live on [csproconnect.tech](https://csproconnect.tech) using the default 
 - **Login:** Students can log in to view and download timetables, marks, notices, and materials.
 - **Dashboard:** Access all academic information and resources in one place.
 
-## Contributors
+## Collaborators
 - [Ketul Prajapati - @ketul-prajapati](https://github.com/Ketul-Prajapati)
 - [Himilsinh Sindha - @himilsinh-sindha](https://github.com/himilsinh-sindha)
 - [Preet Mistry - @preet-mistry](https://github.com/Preet2003)
 - [Bhaumik Lodhia - @bhaumik29](https://www.github.com/bhaumik29)
 - [Kuldeepsinh Jhala - @kuldeepsinh-jhala](https://github.com/kuldeepjhala-dev)
 
-## Contributing
+## Contributions
 Contributions are welcome! Please fork this repository and create a pull request with your changes. Ensure your code follows best practices and is well-documented.
 
 ## License
